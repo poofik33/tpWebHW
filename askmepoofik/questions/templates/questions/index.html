@@ -1,0 +1,65 @@
+{% extends "questions/base.html" %}      
+
+{% block content %}
+<div class="container-fluid border-bottom mb-2">
+    <h2 class="m-0" style="font-family: Permanent Marker;">
+        {{ title }}
+    </h2>
+    {% if link %}
+    <a href="{{ link }}" class="px-2" style="font-family: Permanent Marker; font-size: large">
+        {{ link_title }}
+    </a>
+    {% endif %}
+</div>
+{% for question in questions %}
+<div class="question">
+    <div class="row">
+        <div class="col-2 align-self-start">
+            <div class="btn-group" style="width: 130px;">
+                <a href="#" class="btn btn-primary">
+                    <img class="icon" src="../../static/node_modules/material-design-icons/action/svg/design/ic_thumb_up_24px.svg">
+                </a>
+                <div class="btn btn-primary active">{{ question.questionlikes_set.all.count }}</div>
+                <a href="#" class="btn btn-primary">
+                    <img class="icon" src="../../static/node_modules/material-design-icons/action/svg/design/ic_thumb_down_24px.svg">
+                </a>
+            </div>
+            <button class="btn btn-primary btn-sm mt-1" style="width: 130px">
+                Answers <span class="badge badge-light" style="font-size: smaller;">
+                    {{ question.answer_set.all.count }}
+                </span>
+            </button>
+            <div class="d-flex my-1">
+                <img class="avatar shadow img-thumbnail"src="../../static/images/pepeJAM.gif" alt="">
+                <a href="#" class="col align-self-center"style="font-size: small;">{{ question.author }}</a>
+            </div>
+        </div>
+        <div class="col-10">
+            <h5 class="d-flex">
+                <a href="{% url 'question' question.pk %}" class="text-truncate">
+                    {{ question.title }}
+                </a>
+            </h5>
+            <div class="d-block text-justify" style="font-size: small;">
+                {{ question.content }}        
+            </div>
+            <div class="container-fluid px-0 pt-2">
+                <span style="font-family: Permanent Marker;">Tags:</span>
+                {% for tag in question.tags.all %}
+                <div class="btn-group">
+                    <a href="{% url 'tag' tag.name %}" class="badge badge-secondary mx-1">{{ tag.name }}</a> 
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+{% if questions.paginator.num_pages > 1 %}
+{% include "questions/paginator.html" with objects=questions %}
+{% endif %}
+
+{% endblock %}
+
+

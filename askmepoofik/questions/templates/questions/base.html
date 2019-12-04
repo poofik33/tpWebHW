@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="../../static/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../static/public/my.css">
+    <link href="../../static/fonts/stylesheet.css" rel="stylesheet">
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+        <header>
+          <nav class="navbar navbar-expand-md navbar-light fixed-top shadow" style="background-color: #e3f2fd;">
+            <a class="navbar-brand site-brand" href="/">AskMe</a>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+              <ul class="container navbar-nav">
+                <li class="container nav-item active">
+                  <form class="form mt-2 mt-md-0">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                  </form>
+                </li>
+                <li class="nav-item">
+                  <a class="btn btn-success shadow" href="/ask/" style="font-family: Permanent Marker;">ASK</a>
+                </li>
+              </ul>
+              <img src="../../static/images/peepoclown_avatar.jpg" class="shadow navbar-avatar img-thumbnail">
+              <div class="mx-2">
+                  <div class="text-center font-weight-bold text-truncate" style="width: 180px;">
+                      My very very very big Nickname
+                    </div>
+                    <ul class="nav">
+                      <li class="nav-item">
+                        <a class="nav-link py-1" href="/settings/">Settings</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link py-1" href="#">Log Out</a>
+                      </li>
+                    </ul>
+              </div>
+            </div>
+          </nav>
+        </header>
+
+    <div class="main-content">
+        <div class="container-fluid row">
+            <div class="col-8 bg-light pt-3 border-right">
+                {% block content %} {% endblock %}
+              </div>
+            <div class="col-4 pt-3 pl-5">
+              <div class="container">              
+                <h1 style="font-family: Permanent Marker;">Popular tags</h1>
+                <p>
+                  <a href="" class="badge badge-secondary m-1" style="font-size: xx-large">MostPopTag</a>
+                  <a href="" class="badge badge-secondary m-1" style="font-size: x-large">LilLessPopTag</a>
+                  <a href="" class="badge badge-secondary m-1" style="font-size: x-large">LilLessPopTag</a>
+                  <a href="" class="badge badge-secondary m-1" style="font-size: larger">LessPopTag</a> 
+                  <a href="" class="badge badge-secondary m-1" style="font-size: larger">LessPopTag</a> 
+                  <a href="" class="badge badge-secondary m-1" style="font-size: larger">LessPopTag</a> 
+                  <a href="" class="badge badge-secondary m-1" style="font-size: larger">LessPopTag</a> 
+                  <a href="" class="badge badge-secondary m-1" style="font-size: large">PopTag</a> 
+                  <a href="" class="badge badge-secondary m-1" style="font-size: large">PopTag</a> 
+                  <a href="" class="badge badge-secondary m-1" style="font-size: large">PopTag</a>
+                  <a href="" class="badge badge-secondary m-1" style="font-size: large">PopTag</a> 
+                  <a href="" class="badge badge-secondary m-1" style="font-size: large">PopTag</a> 
+                  <a href="" class="badge badge-secondary m-1" style="font-size: large">PopTag</a> 
+                  <a href="" class="badge badge-secondary m-1" style="font-size: large">PopTag</a> 
+                  <a href="" class="badge badge-secondary m-1" style="font-size: large">PopTag</a> 
+                  <a href="" class="badge badge-secondary m-1" style="font-size: large">PopTag</a> 
+                  <a href="" class="badge badge-secondary m-1" style="font-size: large">PopTag</a> 
+                  <a href="" class="badge badge-secondary m-1" style="font-size: large">PopTag</a> 
+                </p>
+              </div>
+              <div class="container">
+                <h1 style="font-family: Permanent Marker;">Popular members</h1>
+                <div class="list-group list-group-flush">
+                    <div class="list-group-item list-group-item-action p-2">
+                      <img src="../../static/images/monkaS.png" class="shadow top-list-avatar img-thumbnail">
+                      <a href="" class="badge badge-dark">TopUser1</a>
+                    </div>
+                    <div class="list-group-item list-group-item-action p-2">
+                        <img src="../../static/images/poggers.png" class="shadow top-list-avatar img-thumbnail">
+                        <a href="" class="badge badge-dark">TopUser2</a>
+                    </div>
+                    <div class="list-group-item list-group-item-action p-2">
+                        <img src="../../static/images/peepoclown_avatar.jpg" class="shadow top-list-avatar img-thumbnail">
+                        <a href="" class="badge badge-dark">TopUser3</a>
+                    </div>
+                    <div class="list-group-item list-group-item-action p-2">
+                        <img src="../../static/images/EZ.png" class="shadow top-list-avatar img-thumbnail">
+                        <a href="" class="badge badge-dark">TopUser4</a>
+                    </div>
+                    <div class="list-group-item list-group-item-action p-2">
+                        <img src="../../static/images/pepeJAM.gif" class="shadow top-list-avatar img-thumbnail">
+                        <a href="" class="badge badge-dark">TopUser5</a>
+                    </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+    <div style="height: 75px; background-color: #e3f2fd;"></div>
+    <script src="../../static/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../../static/node_modules/popper.js/dist/popper.min.js"></script>
+    <script src="../../static/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  </body>
+</html>
+
