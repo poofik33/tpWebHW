@@ -1,0 +1,41 @@
+.main-content {
+    margin-top: 76px;
+}
+
+.avatar {
+    max-width: 30px;
+    max-height: 30px;
+}
+
+.settings-avatar {
+    max-width: 100px;
+    max-height: 100px;
+}
+
+.icon {
+    max-width: 18px;
+    max-height: 18px;
+}
+
+.navbar-avatar {
+    max-width: 60px;
+    max-height: 60px;
+}
+
+.top-list-avatar {
+    max-width: 35px;
+    max-height: 35px;
+}
+
+.question {
+    border: solid 1px grey;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.site-brand  {
+    font-family: 'Permanent Marker', cursive;
+    font-size: xx-large;
+}

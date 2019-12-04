@@ -1,0 +1,84 @@
+{% extends "questions/base.html" %}
+
+
+{% block content %}
+<div class="container-fluid border-bottom pb-2 mb-2">
+    <div class="container">
+        <h2 class="m-0 mb-2" style="font-style: italic">
+                {{ question.title }}
+        </h2>
+        <p class="mb-1 text-justify">
+            {{ question.content }}
+        </p>
+        <div class="row mt-2">
+            <div class="col-2">
+                <div class="btn-group">
+                    <a href="#" class="btn btn-primary">
+                        <img class ="icon" src="../../static/node_modules/material-design-icons/action/svg/design/ic_thumb_up_24px.svg">
+                    </a>
+                    <div class="btn btn-primary active">{{ question.rating }}</div>
+                    <a href="#" class="btn btn-primary">
+                        <img class ="icon" src="../../static/node_modules/material-design-icons/action/svg/design/ic_thumb_down_24px.svg">
+                    </a>
+                </div>
+            </div>
+            <div class="col-7 align-self-center">
+                <span style="font-family: Permanent Marker;">Tags:</span>
+                <div class="btn-group">
+                    {% for tag in question.tags.all %}
+                    <a href="#" class="badge badge-secondary mx-1">{{ tag.name }}</a>
+                    {% endfor %}  
+                </div>   
+            </div>
+            <div class="col-3 align-self-center">
+                    <img class="avatar shadow img-thumbnail"src="../../static/images/pepeJAM.gif" alt="">
+                    <a href="#" style="font-size: small;">{{ question.author }}</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid border-bottom pb-2 mb-2">
+{% for answer in answers %}
+    <div class="question">
+        <div class="row">
+            <div class="col-2 align-self-start">
+                <div class="btn-group" style="width: 130px;">
+                    <a href="#" class="btn btn-primary">
+                        <img class ="icon" src="../../static/node_modules/material-design-icons/action/svg/design/ic_thumb_up_24px.svg">
+                    </a>
+                    <div class="btn btn-primary active">{{ answer.1 }}</div>
+                    <a href="#" class="btn btn-primary">
+                        <img class ="icon" src="../../static/node_modules/material-design-icons/action/svg/design/ic_thumb_down_24px.svg">
+                    </a>
+                </div>
+                <div class="d-flex my-1">
+                        <img class="avatar shadow img-thumbnail"src="../../static/images/pepeJAM.gif" alt="">
+                        <a href="#" class="col align-self-center"style="font-size: small;">{{ answer.0.author }}</a>
+                </div>
+            </div>
+            <div class="col-10">
+                <div class="d-block text-justify" style="font-size: small;">
+                    {{ answer.0.content }} 
+                </div>
+                <div class="custom-control custom-checkbox mt-2">
+                    <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
+                    <label class="custom-control-label" for="customControlAutosizing">Correct</label>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+</div>
+
+{% if answers.paginator.num_pages > 1 %}
+{% include "questions/paginator.html" with objects=answers %}
+{% endif %}
+
+<form class="mx-3 my-2">
+    <div class="form-group">
+        <textarea class="form-control" id="Text" placeholder="Input your answer here..." style="min-height: 100px;"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Answer</button>
+</form>
+
+{% endblock %}

@@ -1,0 +1,35 @@
+<nav class="mx-2 mt-4">
+    <ul class="pagination">
+        <li class="page-item{% if not objects.has_previous %} disabled{% endif %}">
+            <a class="page-link" href="?page={% if objects.has_previous %}{{objects.previous_page_number}}{% endif %}">
+                Previous
+            </a>
+        </li>
+        {% if objects.number != 1 %}
+        <li class="page-item">
+            <a class="page-link" href="?page=1">1</a>
+        </li>
+        {% endif %}
+        {% if objects.previous_page_number != 1 %}
+        <li class="page-item disabled"><a class="page-link">...</a></li>
+        {% endif %}
+        <li class="page-item active" aria-current="page">
+            <span class="page-link">{{ objects.number }}</span>
+        </li>
+        {% if objects.next_page_number != objects.paginator.num_pages %}
+        <li class="page-item disabled"><a class="page-link">...</a></li>
+        {% endif %}
+        {% if objects.number != objects.paginator.num_pages %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{objects.paginator.num_pages}}">
+            {{ objects.paginator.num_pages }}
+            </a>
+        </li>
+        {% endif %}
+        <li class="page-item {% if not objects.has_next %}disabled{% endif %}">
+            <a class="page-link" href="?page={% if objects.has_next %}{{objects.next_page_number}}{% endif %}">
+                Next
+            </a>
+        </li>
+    </ul>
+</nav>
