@@ -17,13 +17,12 @@ class AnswerManager(models.Manager):
         return content
 
     
-
 class Answer(models.Model):
     content = models.TextField(verbose_name='Содержание')
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     question = models.ForeignKey('Question', on_delete=models.CASCADE, default='')
     datetime_published = models.DateTimeField(verbose_name='Дата публикации')
-    correct = models.BooleanField(verbose_name='Правильный ответ')
+    correct = models.BooleanField(verbose_name='Правильный ответ', default=False)
     rating = models.IntegerField(verbose_name='Рейтинг', default=0)
 
     objects = AnswerManager()
@@ -32,19 +31,14 @@ class Answer(models.Model):
         verbose_name = 'Ответ'
         verbose_name_plural = 'Ответы'
 
-class LikeManager(models.Manager):
-    def get_rating(self):
-        pass
-
 class AnswerLikes(models.Model):
     rating = models.BooleanField(verbose_name='Оценка')
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, )
     grade_datetime = models.DateTimeField(verbose_name='Дата выставления')
     answer = models.ForeignKey(Answer, on_delete=models.CASCADE)
 
-    objects = LikeManager()
-
     class Meta:
+        unique_together = ['answer', 'author'] 
         verbose_name = 'Оценка ответа'
         verbose_name_plural = 'Оценки ответов'
 
@@ -62,7 +56,7 @@ class QuestionManager(models.Manager):
         return questions
 
     def hot_questions(self):
-        questions = self.all()
+        questions = self.all().order_by('-rating')
         return questions
 
     def tag_questions(self, tag_name):
@@ -91,9 +85,8 @@ class QuestionLikes(models.Model):
     grade_datetime = models.DateTimeField(verbose_name='Дата выставления')
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
 
-    objects = LikeManager()
-
     class Meta:
+        unique_together = ['author', 'question']
         verbose_name = 'Оценка вопроса'
         verbose_name_plural ='Оценки вопросов'
 

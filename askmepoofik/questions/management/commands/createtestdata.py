@@ -13,15 +13,16 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         test_users = User.objects.filter(username__contains='test')
+        self.stdout.write('Deleting test users...')
         for user in test_users:
-            self.stdout.write('Deleting ' + user.username)
             user.delete()
 
         test_tags = Tag.objects.filter(name__contains='tag')
         for tag in test_tags:
-            self.stdout.write('Deleting ' + tag.name)
+            self.stdout.write('Deleting test tags..')
             tag.delete()
 
+        self.stdout.write('Creating test tags...')
         for num in range(1,6):
             name = str(num) + 'test'
             password = 'ASDfgh12345'
@@ -34,6 +35,7 @@ class Command(BaseCommand):
             tag = Tag(name=tag_name)
             tag.save()
 
+        self.stdout.write('Creating test users and questions...')
         test_users = User.objects.filter(username__contains='test')
         for user in test_users:
             for num in range(1, 11):
@@ -55,6 +57,7 @@ class Command(BaseCommand):
                     tags = Tag.objects.all()[3:6]
                 q.tags.add(tags[0], tags[1], tags[2])
 
+        self.stdout.write('Creating likes and answers...')
         questions = Question.objects.filter(title__contains='Question')
         for question in questions:
             for user in test_users:
@@ -68,10 +71,32 @@ class Command(BaseCommand):
                 settings.TIME_ZONE  # 'UTC'
                 aware_datetime = make_aware(naive_datetime)
                 aware_datetime.tzinfo  # <UTC>
-                ql = QuestionLikes(author=user, raiting=rt, grade_datetime=aware_datetime, question=question)
+                ql = QuestionLikes(author=user, rating=rt, grade_datetime=aware_datetime, question=question)
                 ql.save()
 
-                ans = Answer(author=user,)
+                content = 'Content of answer of user ' + user.username
+                ans = Answer(author=user, content=content, question=question,
+                             datetime_published=aware_datetime)
+                ans.save()
+                for u in test_users:
+                    if random.randint(0,1) == 1:
+                        rt = True
+                    else:
+                        rt = False
+                    al = AnswerLikes(rating=rt, author=user, grade_datetime=aware_datetime,
+                                     answer=ans)
+                    al.save()
+                rate = [
+                    rate.rating for rate in ans.answerlikes_set.all()
+                ]
+                rate = rate.count(True) - rate.count(False)
+                ans.rating = rate
+                ans.save()
 
+            rate = [
+                rate.rating for rate in question.questionlikes_set.all()]
+            rate = rate.count(True) - rate.count(False)
+            question.rating = rate
+            question.save()
 
         self.stdout.write('Data added to database')

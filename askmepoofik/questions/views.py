@@ -21,7 +21,7 @@ def login(request):
     return render(request, 'questions/login.html')
 
 def hot(request):
-    questions_page, paginator = paginate(Question.objects.new_questions(), request)
+    questions_page, paginator = paginate(Question.objects.hot_questions(), request)
     questions = paginator.get_page(questions_page)
     return render(request, 'questions/index.html', {
         'questions': questions,
