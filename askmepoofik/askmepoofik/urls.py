@@ -24,6 +24,7 @@ urlpatterns = [
     path('ask/', questions.ask, name="ask"),
     path('hot/', questions.hot, name="hot"),
     path('login/', questions.login, name="login"),
+    path('logout/', questions.logout, name="logout"),
     path('question/<int:question_id>/', questions.question, name="question"),
     path('settings/', questions.settings, name="profile"),
     path('signup/', questions.signup, name="registration"),

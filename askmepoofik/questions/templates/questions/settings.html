@@ -2,28 +2,45 @@
 
 
 {% block content %}
+
+{% if form.errors %}
+<div class="alert alert-danger" role="alert">
+    {% if form.non_field_errors %}
+    {% for error in form.non_field_errors %}
+            {{ error|escape }} <br>
+        {% endfor %}
+    {% endif %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            {{ error|escape }} <br>
+        {% endfor %}
+    {% endfor %}
+</div> 
+{% endif %}
+
 <div class="container-fluid border-bottom mb-2">
     <h2 class="m-0" style="font-family: Permanent Marker;">Settings: TopUser2</h2>
 </div>
-<form class="mx-5 mt-4">
+<form class="mx-5 mt-4" action="" method="POST">
+    {% csrf_token %}
     <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="Email">Email</label>
         <div class="col-sm-10">
-            <input name="email" type="email" class="form-control" id="Email" placeholder="Enter email">
-    </div>
+            {{ form.email }}
+        </div>
     </div>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="Nickname">Nickname</label>
         <div class="col-sm-10">
-            <input name="nickname" class="form-control" id="Nickname" placeholder="Enter login">
+            {{ form.login }}
         </div>
     </div>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="avatar-file">Avatar</label>
         <div class="col-sm-10">
-            <img class="img-thumbnail shadow settings-avatar mb-3" src="../../static/images/poggers.png">
+            <img class="img-thumbnail shadow settings-avatar mb-3" src="../../static/images/default-user-image.png">
             <div class="custom-file">
-                <input type="file" name="nickname" class="custom-file-input" id="avatar-file">
+                {{ form.avatar }}
                 <label class="custom-file-label" for="avatar-file">Choose file...</label>
             </div>
         </div>
