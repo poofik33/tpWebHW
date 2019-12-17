@@ -3,3 +3,17 @@
 
 #ignore virtual environment
 venv/
+
+### Django ###
+*.log
+*.pot
+*.pyc
+**/__pycache__
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media
+
+# Byte-compiled / optimized / DLL files
+*.py[cod]
+*$py.class
