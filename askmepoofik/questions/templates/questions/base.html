@@ -13,7 +13,7 @@
   <body>
         <header>
           <nav class="navbar navbar-expand-md navbar-light fixed-top shadow" style="background-color: #e3f2fd;">
-            <a class="navbar-brand site-brand" href="/">AskMe</a>
+            <a class="navbar-brand site-brand" href="{% url 'index' %}">AskMe</a>
             <div class="collapse navbar-collapse" id="navbarCollapse">
               <ul class="container navbar-nav">
                 <li class="container nav-item active">
@@ -22,21 +22,32 @@
                   </form>
                 </li>
                 <li class="nav-item">
-                  <a class="btn btn-success shadow" href="/ask/" style="font-family: Permanent Marker;">ASK</a>
+                  <a class="btn btn-success shadow" href="{% url 'ask' %}" style="font-family: Permanent Marker;">ASK</a>
                 </li>
               </ul>
-              <img src="../../static/images/peepoclown_avatar.jpg" class="shadow navbar-avatar img-thumbnail">
+              <img src="../../static/images/default-user-image.png" class="shadow navbar-avatar img-thumbnail">
               <div class="mx-2">
+                  {% if user.is_authenticated %}
                   <div class="text-center font-weight-bold text-truncate" style="width: 180px;">
-                      My very very very big Nickname
-                    </div>
+                    {{ user.username }}
+                  </div>
+                  {% endif %}
                     <ul class="nav">
+                      {% if user.is_authenticated %}
                       <li class="nav-item">
-                        <a class="nav-link py-1" href="/settings/">Settings</a>
+                        <a class="nav-link py-1" href="{% url 'profile' %}">Settings</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link py-1" href="#">Log Out</a>
+                        <a class="nav-link py-1" href="{% url 'logout' %}">Log Out</a>
                       </li>
+                      {% else %}
+                      <li class="nav-item">
+                        <a class="nav-link py-1" href="{% url 'login' %}">Log in</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link py-1" href="{% url 'registration' %}">Sign up</a>
+                      </li>
+                      {% endif %}
                     </ul>
               </div>
             </div>

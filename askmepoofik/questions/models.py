@@ -44,7 +44,7 @@ class AnswerLikes(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    avatar = models.FilePathField(verbose_name='Аватарка')
+    avatar = models.FilePathField(verbose_name='Аватарка', default='/123.img')
 
     class Meta:
         verbose_name = 'Профиль'
